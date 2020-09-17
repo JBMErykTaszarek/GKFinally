@@ -1,3 +1,4 @@
+
 /*
 Niniejszy program jest wolnym oprogramowaniem; możesz go
 rozprowadzać dalej i / lub modyfikować na warunkach Powszechnej
@@ -33,6 +34,7 @@ Place, Fifth Floor, Boston, MA  02110 - 1301  USA
 #include "shaderprogram.h"
 #include "OBJ_Loader.h"
 #include <time.h>
+#include <Scene.h>
 
 GLuint tex;
 float speed_x = 0;//[radiany/s]
@@ -96,7 +98,7 @@ GLuint readTexture(const char* filename) {
 	return tex;
 }
 
-void plane (glm::mat4 P, glm::mat4 V, glm::mat4 M) {
+void plane(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 	//Przykładowe tablice dla tego zadania - możliwości jest bardzo dużo
 	int currentZ = 1;
 	float birdVertices[] = {
@@ -127,7 +129,7 @@ void plane (glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //Załaduj do programu cieniującego macierz rzutowania
 	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //Załaduj do programu cieniującego macierz widoku
 	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //Załaduj do programu cieniującego macierz modelu
-	
+
 
 
 	glEnableVertexAttribArray(spColored->a("vertex"));
@@ -187,74 +189,74 @@ void Ground(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
 }
 
-void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords){
-//Przykładowe tablice dla tego zadania - możliwości jest bardzo dużo
-	
-float buildingVertices[] = {
-	
-	-5 + cords,3,10 + cords,1,
-	-5 + cords,-3,10 + cords,1,
-	-3 + cords,-3,10 + cords,1,
+void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
+	//Przykładowe tablice dla tego zadania - możliwości jest bardzo dużo
 
-	-3 + cords,-3,10 + cords,1,
-	-3 + cords,3,10 + cords,1,
-	-5 + cords,3,10 + cords,1,
+	float buildingVertices[] = {
 
-	- 5 + cords,3,8 + cords,1,
-	-5 + cords,-3,8 + cords,1,
-	-3 + cords,-3,8 + cords,1,
+		-5 + cords,3,10 + cords,1,
+		-5 + cords,-3,10 + cords,1,
+		-3 + cords,-3,10 + cords,1,
 
-	-3 + cords,-3,8 + cords,1,
-	-3 + cords,3,8 + cords,1,
-	-5 + cords,3,8 + cords,1
+		-3 + cords,-3,10 + cords,1,
+		-3 + cords,3,10 + cords,1,
+		-5 + cords,3,10 + cords,1,
 
+		-5 + cords,3,8 + cords,1,
+		-5 + cords,-3,8 + cords,1,
+		-3 + cords,-3,8 + cords,1,
 
-};
-
-float buildingColors[] = {
-
-	0,0,0,1,
-	0,0,0,1,
-	0,0,0,1,
-
-	0,0,0,1,
-	0,0,0,1,
-	0,0,0,1,
-
-	0,0,0,1,
-	0,0,0,1,
-	0,0,0,1,
-
-	0,0,0,1,
-	0,0,0,1,
-	0,0,0,1
-};
+		-3 + cords,-3,8 + cords,1,
+		-3 + cords,3,8 + cords,1,
+		-5 + cords,3,8 + cords,1
 
 
+	};
 
-spColored->use(); //Aktywuj program cieniujący
+	float buildingColors[] = {
 
-glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //Załaduj do programu cieniującego macierz rzutowania
-glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //Załaduj do programu cieniującego macierz widoku
-glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //Załaduj do programu cieniującego macierz modelu
+		0,0,0,1,
+		0,0,0,1,
+		0,0,0,1,
+
+		0,0,0,1,
+		0,0,0,1,
+		0,0,0,1,
+
+		0,0,0,1,
+		0,0,0,1,
+		0,0,0,1,
+
+		0,0,0,1,
+		0,0,0,1,
+		0,0,0,1
+	};
 
 
 
-glEnableVertexAttribArray(spColored->a("vertex"));
-glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, buildingVertices); //Współrzędne wierzchołków bierz z tablicy birdVertices
+	spColored->use(); //Aktywuj program cieniujący
 
-glEnableVertexAttribArray(spColored->a("color"));
-glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, buildingColors); //Współrzędne wierzchołków bierz z tablicy birdColors
+	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //Załaduj do programu cieniującego macierz rzutowania
+	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //Załaduj do programu cieniującego macierz widoku
+	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //Załaduj do programu cieniującego macierz modelu
 
-glDrawArrays(GL_TRIANGLES, 0, 12);
 
-glDisableVertexAttribArray(spColored->a("vertex"));
-glDisableVertexAttribArray(spColored->a("color"));
+
+	glEnableVertexAttribArray(spColored->a("vertex"));
+	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, buildingVertices); //Współrzędne wierzchołków bierz z tablicy birdVertices
+
+	glEnableVertexAttribArray(spColored->a("color"));
+	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, buildingColors); //Współrzędne wierzchołków bierz z tablicy birdColors
+
+	glDrawArrays(GL_TRIANGLES, 0, 12);
+
+	glDisableVertexAttribArray(spColored->a("vertex"));
+	glDisableVertexAttribArray(spColored->a("color"));
 
 }
 //Procedura inicjująca
 void initOpenGLProgram(GLFWwindow* window) {
-    initShaders();
+	initShaders();
 	//************Tutaj umieszczaj kod, który należy wykonać raz, na początku programu************
 	glClearColor(0, 1, 1, 1); //Ustaw kolor czyszczenia bufora kolorów
 	glEnable(GL_DEPTH_TEST); //Włącz test głębokości na pikselach
@@ -265,16 +267,16 @@ void initOpenGLProgram(GLFWwindow* window) {
 
 //Zwolnienie zasobów zajętych przez program
 void freeOpenGLProgram(GLFWwindow* window) {
-    freeShaders();
-    //************Tutaj umieszczaj kod, który należy wykonać po zakończeniu pętli głównej************
+	freeShaders();
+	//************Tutaj umieszczaj kod, który należy wykonać po zakończeniu pętli głównej************
 	glDeleteTextures(1, &tex);
 }
 
 //Procedura rysująca zawartość sceny
-void drawScene(GLFWwindow* window,float speed_x,float speed_y) {
+void drawScene(GLFWwindow* window, float speed_x, float speed_y) {
 	//************Tutaj umieszczaj kod rysujący obraz******************l
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Wyczyść bufor koloru i bufor głębokości
-	
+
 	glm::mat4 V = glm::mat4(1.0f); //Zainicjuj macierz modelu macierzą jednostkową
 	//V = glm::rotate(V, angle_y, glm::vec3(0.0f, 1.0f, 0.0f)); //Pomnóż macierz modelu razy macierz obrotu o kąt angle wokół osi Y
 	//V = glm::rotate(V, angle_x, glm::vec3(1.0f, 0.0f, 0.0f)); //Pomnóż macierz modelu razy macierz obrotu o kąt angle wokół osi X
@@ -286,7 +288,7 @@ void drawScene(GLFWwindow* window,float speed_x,float speed_y) {
 	{
 		V = glm::translate(V, glm::vec3(0.0f, -0.5f, 1.0f));
 	}
-	if(speed_y == 1)
+	if (speed_y == 1)
 	{
 		V = glm::translate(V, glm::vec3(0.4f, 0.0f, 1.0f));
 	}
@@ -294,10 +296,10 @@ void drawScene(GLFWwindow* window,float speed_x,float speed_y) {
 	{
 		V = glm::translate(V, glm::vec3(-0.4f, 0.0f, 1.0f));
 	}
-	
+
 	glm::mat4 M = glm::lookAt(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)); //Wylicz macierz widoku
 	glm::mat4 P = glm::perspective(glm::radians(50.0f), 1.0f, 1.0f, 50.0f); //Wylicz macierz rzutowania
-	
+
 	//Zamiast poniższych linijek należy wstawić kod dotyczący rysowania własnych obiektów (glDrawArrays/glDrawElements i wszystko dookoła)
 	//-----------
 	spLambert->use(); //Aktyeuj program cieniujący
@@ -306,17 +308,19 @@ void drawScene(GLFWwindow* window,float speed_x,float speed_y) {
 	glUniformMatrix4fv(spLambert->u("V"), 1, false, glm::value_ptr(V)); //Załaduj do programu cieniującego macierz widoku
 	glUniformMatrix4fv(spLambert->u("M"), 1, false, glm::value_ptr(M)); //Załaduj do programu cieniującego macierz modelu
 	//kom
-	
+
 	srand(time(NULL));
 	float Cords = rand() % 10 + 1;
 	plane(P, V, M);
-	Building(P, V, M,Cords);
+	Building(P, V, M, Cords);
 	Ground(P, V, M);
-	
-	
+
+
+	//app.buildings;
+	app.addBuilding(P, V, M, Cords);
+	test();
 	glfwSwapBuffers(window); //Skopiuj bufor tylny do bufora przedniego
 }
-
 
 int main(void)
 {
@@ -357,7 +361,7 @@ int main(void)
 		//speed_x += speed_x * glfwGetTime(); //Oblicz kąt o jaki obiekt obrócił się podczas poprzedniej klatki
 		//speed_x += speed_y * glfwGetTime(); //Oblicz kąt o jaki obiekt obrócił się podczas poprzedniej klatki
 		//lfwSetTime(0); //Wyzeruj licznik czasu
-		drawScene(window,speed_x,speed_y); //Wykonaj procedurę rysującą
+		drawScene(window, speed_x, speed_y); //Wykonaj procedurę rysującą
 		glfwPollEvents(); //Wykonaj procedury callback w zalezności od zdarzeń jakie zaszły.
 	}
 

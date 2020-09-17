@@ -20,22 +20,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allmodels.h" />
+    <ClInclude Include="Buildings.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="cube.h" />
     <ClInclude Include="lodepng.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="myCube.h" />
     <ClInclude Include="OBJ_Loader.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="shaderprogram.h" />
     <ClInclude Include="sphere.h" />
     <ClInclude Include="teapot.h" />
     <ClInclude Include="torus.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Buildings.cpp" />
     <ClCompile Include="cube.cpp" />
     <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="main_file.cpp" />
     <ClCompile Include="model.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="shaderprogram.cpp" />
     <ClCompile Include="sphere.cpp" />
     <ClCompile Include="teapot.cpp" />
