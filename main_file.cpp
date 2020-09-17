@@ -107,6 +107,7 @@ void plane (glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 		0,1,currentZ,1,
 		0,1,-currentZ,1,
 		-1,0,currentZ,1
+
 	};
 
 	float birdColors[] = {
@@ -197,10 +198,28 @@ float buildingVertices[] = {
 
 	-3 + cords,-3,10 + cords,1,
 	-3 + cords,3,10 + cords,1,
-	-5 + cords,3,10 + cords,1
+	-5 + cords,3,10 + cords,1,
+
+	- 5 + cords,3,8 + cords,1,
+	-5 + cords,-3,8 + cords,1,
+	-3 + cords,-3,8 + cords,1,
+
+	-3 + cords,-3,8 + cords,1,
+	-3 + cords,3,8 + cords,1,
+	-5 + cords,3,8 + cords,1
+
+
 };
 
 float buildingColors[] = {
+
+	0,0,0,1,
+	0,0,0,1,
+	0,0,0,1,
+
+	0,0,0,1,
+	0,0,0,1,
+	0,0,0,1,
 
 	0,0,0,1,
 	0,0,0,1,
@@ -227,7 +246,7 @@ glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, buildingVer
 glEnableVertexAttribArray(spColored->a("color"));
 glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, buildingColors); //Współrzędne wierzchołków bierz z tablicy birdColors
 
-glDrawArrays(GL_TRIANGLES, 0, 6);
+glDrawArrays(GL_TRIANGLES, 0, 12);
 
 glDisableVertexAttribArray(spColored->a("vertex"));
 glDisableVertexAttribArray(spColored->a("color"));
