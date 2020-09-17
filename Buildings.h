@@ -6,6 +6,7 @@ class Buildings
 {
 public:
 	glm::mat4 P; glm::mat4 V; glm::mat4 M; float cords;
+	Buildings();
 	Buildings(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords);
 	~Buildings();
 
