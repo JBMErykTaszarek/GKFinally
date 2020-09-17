@@ -1,0 +1,13 @@
+No to kurwa do zrobienia jest tak:
+
+*podmiana tego zjebanego modelu który teraz robi u nas za samolot na model wgrywany przez OBJLoader
+
+*ruszanie kamerą
+
+*dodanie w pętlu while(game) transformacji macierzy widoku, a dokładniej zmiana jej składowej Z
+
+*Dodanie jakiegoś ładnego tła
+
+*wymodelowanie budynków i ich otexturowanie ewentualnie zajebanie ze stocka gotowych modeli XDD
+
+*detektor kolizji na zasadzie ciągłego porównywania koordynatów samolotu(które nawiasem mówiąc chce zrobić tak aby sie nie zzmieniały, z koordynatami budynków)
