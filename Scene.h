@@ -15,11 +15,10 @@ public:
 	Buildings ground;
 	std::list <Buildings> buildings; //tablica trzymajaca budynki
 	int maxBuildings;
+	
 	Scene();
-
 	//Scene(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords);
 
-	Scene(int n);
 	void addBuilding(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords);
 	void render();
 	~Scene();

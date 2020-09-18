@@ -5,13 +5,13 @@ Scene::Scene() {
 	this->buildings = {};
 	this->maxBuildings = 1;
 }
-Scene::Scene(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
-	this->buildings = {};
-	this->maxBuildings = 2;
-}
+//Scene::Scene(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
+//	this->buildings = {};
+//	this->maxBuildings = 2;
+//}
 void Scene::addBuilding(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
 	if (this->buildings.size() < this->maxBuildings) {
-		this->buildings.push_front(Buildings{ P,V,M,cords });
+		this->buildings.push_front(Buildings{ 0,0,0 });
 	}
 };
 void Scene::render() {
@@ -53,9 +53,10 @@ void Scene::render() {
 	
 	//app.buildings;
 	app.addBuilding(P, V, M, Cords);
-	plane2(P, V, M);
-	Ground(P, V,M);
-		
+	//plane2(P, V, M);
+	//Ground(P, V,M);
+	plane(P, V, M, 0, 0, 0);
+	Ground(P, V, M, 0, 0, 0);
 	if (this->buildings.size() > 0) { 
 		//todo: zrobiæ foreacha który bedzie renderowa³ wiêcej budynków ? xD
 		
@@ -64,34 +65,30 @@ void Scene::render() {
 		Buildings b = get(this->buildings, 0);
 
 		if (s.cords == 0) {
+			this->samolot.cordsx = 0;
+			this->samolot.cordsy = 0;
+			this->samolot.cordsz = 0;
+			this->samolot.cords = 1;
 
-			this->samolot.cords = b.cords;
-			this->samolot.M = b.M;
-			this->samolot.P = b.P;
-			this->samolot.V = b.V;
-
-			this->ground.cords = b.cords;
-			this->ground.M = b.M;
-			this->ground.P = b.P;
-			this->ground.V = b.V;
+			this->ground.cordsx = 0;
+			this->ground.cordsy = 0;
+			this->ground.cordsz = 0;
+			this->ground.cords = 1;
 
 		}
-		//plane(s.P, s.V, s.M);
-		Ground(g.P, g.V, g.M);
+		
 		for (int i = 0; i < this->buildings.size(); i++)
 		{
 			b = get(this->buildings, i);
-			float inc = 1.5;
-			Building(b.P , b.V , b.M, Cords+(i*inc));
+			Cords = rand() % 3 + 1;
+
+			float inc = 2.5 * (i + 1);
+			Building(P, V, M, 0, 0, 0);
 
 		}
 		
 	}
 };
-Scene::Scene(int n) {
-
-}
-
 
 Scene::~Scene() {
 
