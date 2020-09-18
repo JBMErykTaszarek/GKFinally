@@ -5,3 +5,7 @@ Debug/
 .vs/
 .vs/zao_szkielet_02_win/v16/Browse.VC.db
 *.db
+.vs/**/*
+.vs/zao_szkielet_02_win/
+.vs/zao_szkielet_02_win/v16/Browse.VC.db
+.vs/zao_szkielet_02_win/v16/.suo

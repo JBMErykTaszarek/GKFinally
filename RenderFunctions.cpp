@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 #include <Externals.h>
 
 void plane2(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-	//Przyk³adowe tablice dla tego zadania - mo¿liwoœci jest bardzo du¿o
+	//PrzykÅ‚adowe tablice dla tego zadania - moÅ¼liwoÅ›ci jest bardzo duÅ¼o
 	//int currentZ = 1;
 	float birdVertices[] = {
 		-0.5, 0.2, 1, 1,
@@ -45,19 +45,19 @@ void plane2(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
 
 
-	spColored->use(); //Aktywuj program cieniuj¹cy
+	spColored->use(); //Aktywuj program cieniujÄ…cy
 
-	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //Za³aduj do programu cieniuj¹cego macierz rzutowania
-	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //Za³aduj do programu cieniuj¹cego macierz widoku
-	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //Za³aduj do programu cieniuj¹cego macierz modelu
+	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz rzutowania
+	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz widoku
+	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz modelu
 
 
 
 	glEnableVertexAttribArray(spColored->a("vertex"));
-	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, birdVertices); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdVertices
+	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, birdVertices); //WspÃ³Å‚rzÄ™dne wierzchoÅ‚kÃ³w bierz z tablicy birdVertices
 
 	glEnableVertexAttribArray(spColored->a("color"));
-	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, birdColors); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdColors
+	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, birdColors); //WspÃ³Å‚rzÄ™dne wierzchoÅ‚kÃ³w bierz z tablicy birdColors
 
 	glDrawArrays(GL_TRIANGLES, 0, 12);
 
@@ -66,45 +66,63 @@ void plane2(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
 }
 
-void plane(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-	//Przyk³adowe tablice dla tego zadania - mo¿liwoœci jest bardzo du¿o
+void plane(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, float cordsz) {
 	int currentZ = 1;
+	int x1 = 0, x2 = 1, x3 = -1;
+	int y1 = 1, y2 = 0;
+	int z1 = 1, z2 = -1;
 	float birdVertices[] = {
-		0,1,currentZ,1,
-		1,0,currentZ,1,  //CuremtZ = Zcamery
-		0,1,-currentZ,1,
+	-0.5, 0.2, 1, 1,
+		-1.5, 0.2, 1, 1,
+		0, 0.2, 3, 1,
 
-		0,1,currentZ,1,
-		0,1,-currentZ,1,
-		-1,0,currentZ,1
+		0.5, 0.2, 1, 1,
+		1.5, 0.2, 1, 1,
+		0, 0.2, 3, 1,
+
+		0,0,1,1,
+		-0.5,0.2,1,1,
+		0,0.2,3,1,
+
+		0,0,1,1,
+		0.5,0.2,1,1,
+		0,0.2,3,1
 
 	};
 
 	float birdColors[] = {
-		1,0,0,1,
-		0,1,0,1,
-		1,0,0,1,
+		1,1,1,1,
+		1,1,1,1,
+		1,1,1,1,
 
-		1,0,0,1,
-		1,0,0,1,
-		0,0,1,1
+		1,1,1,1,
+		1,1,1,1,
+		1,1,1,1,
+
+		1,1,1,1,
+		1,1,1,1,
+		1,1,1,1,
+
+		1,1,1,1,
+		1,1,1,1,
+		1,1,1,1
 	};
 
 
 
-	spColored->use(); //Aktywuj program cieniuj¹cy
+	spColored->use(); //Aktywuj program cieniujÄ…cy
 
-	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //Za³aduj do programu cieniuj¹cego macierz rzutowania
-	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //Za³aduj do programu cieniuj¹cego macierz widoku
-	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //Za³aduj do programu cieniuj¹cego macierz modelu
+	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz rzutowania
+	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz widoku
+	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz modelu
 
 
 
 	glEnableVertexAttribArray(spColored->a("vertex"));
-	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, birdVertices); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdVertices
+	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, birdVertices); //WspÃ³Å‚rzÄ™dne wierzchoÅ‚kÃ³w bierz z tablicy birdVertices
 
 	glEnableVertexAttribArray(spColored->a("color"));
-	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, birdColors); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdColors
+	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, birdColors); //WspÃ³Å‚rzÄ™dne wierzchoÅ‚kÃ³w bierz z tablicy birdColors
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -113,18 +131,20 @@ void plane(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
 }
 
-void Ground(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
-	//Przyk³adowe tablice dla tego zadania - mo¿liwoœci jest bardzo du¿o
+void Ground(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, float cordsz) {
+	int x1 = 100, x2 = -100;
+	int y1 = -3;
+	int z1 = -1, z2 = 1, z3 = 100;
 
 	float groundVertices[] = {
 
-		-100,-3,-1,1,
-		100,-3,-1,1,
-		-100,-3,100,1,
+		x2 + cordsx,y1 + cordsy,z1 + cordsz,1,
+		x1 + cordsx,y1 + cordsy,z1 + cordsz,1,
+		x2 + cordsx,y1 + cordsy,z3 + cordsz,1,
 
-		100,-3,100,1,
-		100,-3,1,1,
-		-100,-3,100,1
+		x1 + cordsx,y1 + cordsy,z3 + cordsz,1,
+		x1 + cordsx,y1 + cordsy,z2 + cordsz,1,
+		x2 + cordsx,y1 + cordsy,z3 + cordsz,1
 	};
 
 	float groundColors[] = {
@@ -136,19 +156,19 @@ void Ground(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
 
 
-	spColored->use(); //Aktywuj program cieniuj¹cy
+	spColored->use(); //Aktywuj program cieniujÄ…cy
 
-	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //Za³aduj do programu cieniuj¹cego macierz rzutowania
-	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //Za³aduj do programu cieniuj¹cego macierz widoku
-	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //Za³aduj do programu cieniuj¹cego macierz modelu
+	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz rzutowania
+	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz widoku
+	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz modelu
 
 
 
 	glEnableVertexAttribArray(spColored->a("vertex"));
-	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, groundVertices); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdVertices
+	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, groundVertices); //WspÃ³Å‚rzÄ™dne wierzchoÅ‚kÃ³w bierz z tablicy birdVertices
 
 	glEnableVertexAttribArray(spColored->a("color"));
-	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, groundColors); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdColors
+	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, groundColors); //WspÃ³Å‚rzÄ™dne wierzchoÅ‚kÃ³w bierz z tablicy birdColors
 
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -157,43 +177,31 @@ void Ground(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 
 }
 
-void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
-	//Przyk³adowe tablice dla tego zadania - mo¿liwoœci jest bardzo du¿o
-
+void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, float cordsz) {
+	//PrzykÅ‚adowe tablice dla tego zadania - moÅ¼liwoÅ›ci jest bardzo duÅ¼o
+	int x1 = -5, x2 = -3;
+	int y1 = 3, y2 = -3;
+	int z1 = 10, z2 = 8;
 	float buildingVertices[] = {
 
-		-5 + cords,3,10 + cords,1,
-		-5 + cords,-3,10 + cords,1,
-		-3 + cords,-3,10 + cords,1,
+		//piertwszy trï¿½jkat
+	//X,Y,Z,Opacity
 
-		-3 + cords,-3,10 + cords,1,
-		-3 + cords,3,10 + cords,1,
-		-5 + cords,3,10 + cords,1,
-
-		-5 + cords,3,8 + cords,1,
-		-5 + cords,-3,8 + cords,1,
-		-3 + cords,-3,8 + cords,1,
-
-		-3 + cords,-3,8 + cords,1,
-		-3 + cords,3,8 + cords,1,
-		-5 + cords,3,8 + cords,1,
-
-
-		-5 + cords,3,10 + cords,1,
-		-5 + cords,-3,10 + cords,1,
-		-5 + cords,3,10 + cords,1,
-
-		-5 + cords,3,8 + cords,1,
-		-5 + cords,3,8 + cords,1,
-		-5 + cords,-3,8 + cords,1,
-		
-		-3 + cords,-3,10 + cords,1,
-		-3 + cords,-3,10 + cords,1,
-		-3 + cords,3,10 + cords,1,
-
-		-3 + cords,-3,8 + cords,1,
-		-3 + cords,-3,8 + cords,1,
-		-3 + cords,3,8 + cords,1,
+	x1 + cordsx, y1 + cordsy, z1 + cordsz, 1,
+	x1 + cordsx,y2 + cordsy,z1 + cordsz,1,
+	x2 + cordsx,y2 + cordsy,z1 + cordsz,1,
+	//drtugi trojkat
+	x2 + cordsx,y2 + cordsy,z1 + cordsz,1,
+	x2 + cordsx,y1 + cordsy,z1 + cordsz,1,
+	x1 + cordsx,y1 + cordsy,z1 + cordsz,1,
+	//te z tyï¿½u xD
+	x1 + cordsx,y1 + cordsy,z2 + cordsz,1,
+	x1 + cordsx,y2 + cordsy,z2 + cordsz,1,
+	x2 + cordsx,y2 + cordsy,z2 + cordsz,1,
+	//te z tyï¿½u xD
+	x2 + cordsx,y2 + cordsy,z2 + cordsz,1,
+	x2 + cordsx,y1 + cordsy,z2 + cordsz,1,
+	x1 + cordsx,y1 + cordsy,z2 + cordsz,1
 
 
 
@@ -218,40 +226,26 @@ void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
 		0,0,0,1,
 		0,0,0,1,
 
-		0,0,0,1,
-		0,0,0,1,
-		0,0,0,1,
-
-		0,0,0,1,
-		0,0,0,1,
-		0,0,0,1,
-
-		0,0,0,1,
-		0,0,0,1,
-		0,0,0,1,
-
-		0,0,0,1,
-		0,0,0,1,
-		0,0,0,1
+	
 	};
 
 
 
-	spColored->use(); //Aktywuj program cieniuj¹cy
+	spColored->use(); //Aktywuj program cieniujÄ…cy
 
-	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //Za³aduj do programu cieniuj¹cego macierz rzutowania
-	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //Za³aduj do programu cieniuj¹cego macierz widoku
-	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //Za³aduj do programu cieniuj¹cego macierz modelu
+	glUniformMatrix4fv(spColored->u("P"), 1, false, glm::value_ptr(P)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz rzutowania
+	glUniformMatrix4fv(spColored->u("V"), 1, false, glm::value_ptr(V)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz widoku
+	glUniformMatrix4fv(spColored->u("M"), 1, false, glm::value_ptr(M)); //ZaÅ‚aduj do programu cieniujÄ…cego macierz modelu
 
 
 
 	glEnableVertexAttribArray(spColored->a("vertex"));
-	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, buildingVertices); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdVertices
+	glVertexAttribPointer(spColored->a("vertex"), 4, GL_FLOAT, false, 0, buildingVertices); //WspÃ³Å‚rzÄ™dne wierzchoÅ‚kÃ³w bierz z tablicy birdVertices
 
 	glEnableVertexAttribArray(spColored->a("color"));
-	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, buildingColors); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdColors
+	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, buildingColors); //WspÃ³Å‚rzÄ™dne wierzchoÅ‚kÃ³w bierz z tablicy birdColors
 
-	glDrawArrays(GL_TRIANGLES, 0, 1);
+	glDrawArrays(GL_TRIANGLES, 0, 12);
 
 	glDisableVertexAttribArray(spColored->a("vertex"));
 	glDisableVertexAttribArray(spColored->a("color"));
