@@ -3,22 +3,22 @@
 
 Scene::Scene() {
 	this->buildings = {};
+	this->maxBuildings = 1;
+}
+Scene::Scene(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
+	this->buildings = {};
 	this->maxBuildings = 2;
 }
-//Scene::Scene(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
-//	this->buildings = {};
-//	this->maxBuildings = 2;
-//}
 void Scene::addBuilding(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
 	if (this->buildings.size() < this->maxBuildings) {
-		this->buildings.push_front(Buildings{ 0,0,0 });
+		this->buildings.push_front(Buildings{ P,V,M,cords });
 	}
 };
 void Scene::render() {
 
 	glm::mat4 V = glm::mat4(1.0f); //Zainicjuj macierz modelu macierz¹ jednostkow¹
-	//V = glm::rotate(V, angle_y, glm::vec3(0.0f, 1.0f, 0.0f)); //Pomnó¿ macierz modelu razy macierz obrotu o k¹t angle wokó³ osi Y
-	//V = glm::rotate(V, angle_x, glm::vec3(1.0f, 0.0f, 0.0f)); //Pomnó¿ macierz modelu razy macierz obrotu o k¹t angle wokó³ osi X
+//V = glm::rotate(V, angle_y, glm::vec3(0.0f, 1.0f, 0.0f)); //Pomnó¿ macierz modelu razy macierz obrotu o k¹t angle wokó³ osi Y
+//V = glm::rotate(V, angle_x, glm::vec3(1.0f, 0.0f, 0.0f)); //Pomnó¿ macierz modelu razy macierz obrotu o k¹t angle wokó³ osi X
 	if (speed_x == 1)
 	{
 		V = glm::translate(V, glm::vec3(0.0f, 1.0f, 1.0f));
@@ -50,50 +50,42 @@ void Scene::render() {
 
 	srand(time(NULL));
 	float Cords = rand() % 10 + 1;
-
+	
 	//app.buildings;
 	app.addBuilding(P, V, M, Cords);
-	
-
-	if (this->buildings.size() > 0) {
+	plane2(P, V, M);
+	Ground(P, V,M);
+		
+	if (this->buildings.size() > 0) { 
 		//todo: zrobiæ foreacha który bedzie renderowa³ wiêcej budynków ? xD
-
+		
 		Buildings s = this->samolot;
 		Buildings g = this->ground;
 		Buildings b = get(this->buildings, 0);
 
 		if (s.cords == 0) {
 
-			this->samolot.cordsx = 0;
-			this->samolot.cordsy = 0;
-			this->samolot.cordsz = 0;
-			this->samolot.cords = 1;
-
-			this->ground.cordsx = 0;
-			this->ground.cordsy = 0;
-			this->ground.cordsz = 0;
-			this->ground.cords = 1;
-			/*this->samolot.P = b.P;
+			this->samolot.cords = b.cords;
+			this->samolot.M = b.M;
+			this->samolot.P = b.P;
 			this->samolot.V = b.V;
 
 			this->ground.cords = b.cords;
 			this->ground.M = b.M;
 			this->ground.P = b.P;
-			this->ground.V = b.V;*/
+			this->ground.V = b.V;
 
 		}
-		plane(P, V, M, 0, 0, 0);
-		Ground(P, V, M, 0, 0, 0);
+		//plane(s.P, s.V, s.M);
+		Ground(g.P, g.V, g.M);
 		for (int i = 0; i < this->buildings.size(); i++)
 		{
 			b = get(this->buildings, i);
-			Cords = rand() % 3 + 1;
-
-			float inc = 2.5 * (i + 1);
-			Building(P, V, M, 0, 0, 0);
+			float inc = 1.5;
+			Building(b.P , b.V , b.M, Cords+(i*inc));
 
 		}
-
+		
 	}
 };
 Scene::Scene(int n) {
