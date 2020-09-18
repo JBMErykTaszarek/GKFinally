@@ -72,21 +72,21 @@ void plane(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, fl
 	int y1 = 1, y2 = 0;
 	int z1 = 1, z2 = -1;
 	float birdVertices[] = {
-	-0.5, 0.2, 1, 1,
-		-1.5, 0.2, 1, 1,
-		0, 0.2, 3, 1,
+	-0.5 + cordsx, 0.2 + cordsy, 1, 1,
+		-1.5 + cordsx, 0.2 + cordsy, 1, 1,
+		0 + cordsx, 0.2 + cordsy, 3, 1,
 
-		0.5, 0.2, 1, 1,
-		1.5, 0.2, 1, 1,
-		0, 0.2, 3, 1,
+		0.5 + cordsx, 0.2 + cordsy, 1, 1,
+		1.5 + cordsx, 0.2 + cordsy, 1, 1,
+		0 + cordsx, 0.2 + cordsy, 3, 1,
 
-		0,0,1,1,
-		-0.5,0.2,1,1,
-		0,0.2,3,1,
+		0 + cordsx,0 + cordsy,1,1,
+		-0.5 + cordsx,0.2 + cordsy,1,1,
+		0 + cordsx,0.2 + cordsy,3,1,
 
-		0,0,1,1,
-		0.5,0.2,1,1,
-		0,0.2,3,1
+		0 + cordsx,0 + cordsy,1,1,
+		0.5 + cordsx,0.2 + cordsy,1,1,
+		0 + cordsx,0.2 + cordsy,3,1
 
 	};
 
@@ -226,7 +226,7 @@ void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy,
 		0,0,0,1,
 		0,0,0,1,
 
-	
+
 	};
 
 

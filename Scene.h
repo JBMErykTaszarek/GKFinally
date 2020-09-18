@@ -27,8 +27,8 @@ public:
 	void addBuilding(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords);
 	void render();
 };
-	VOID CALLBACK TimerProc(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime);
-
+	VOID CALLBACK ChangeBuildingsPosition(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime);
+	VOID CALLBACK CheckBuildingsInScreen(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime);
 extern Scene app;
 void replace(std::list<Buildings>& l, const Buildings b);
 Buildings get(std::list<Buildings> _list, int _i);
