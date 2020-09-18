@@ -2,4 +2,7 @@ Debug/
 .vs/zao_szkielet_02_win/v16/ipch/AutoPCH/bd6115c34b427e50/MAIN_FILE.ipch
 .vs/zao_szkielet_02_win/v16/ipch/AutoPCH/99f711e114462ee6/MAIN_FILE.ipch
 .vs/zao_szkielet_02_win/v16/Browse.VC.opendb
-.vs/
+.vs/**/*
+.vs/zao_szkielet_02_win/
+.vs/zao_szkielet_02_win/v16/Browse.VC.db
+.vs/zao_szkielet_02_win/v16/.suo
