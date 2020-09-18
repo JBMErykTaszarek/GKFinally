@@ -5,9 +5,12 @@
 class Buildings
 {
 public:
-	glm::mat4 P; glm::mat4 V; glm::mat4 M; float cords;
+	/*glm::mat4 P; glm::mat4 V; glm::mat4 M; 
+	float cords;*/
+	float cordsx; float cordsy; float cordsz;
+	float cords; //czasowa zmienna sprawdzamy tylk czy jest ustawiony boiekt w pamieci czy ma wartosci
 	Buildings();
-	Buildings(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords);
+	Buildings(float cordsx, float cordsy, float cordsz);
 	~Buildings();
 
 private:
