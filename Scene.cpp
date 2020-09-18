@@ -10,17 +10,24 @@ Scene::Scene() {
 	UINT TimerId = SetTimer(NULL, 0, 1000, &TimerProc);
 }
 VOID CALLBACK TimerProc(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime) {
-
+	//petla ktora sie wykonuje co sekunde
 	float z;
 	for (int i = 0; i < app.buildings.size(); i++)
 	{
 		Buildings b = get(app.buildings, i);
 		int random = rand() % 10 + 1;
 		int x = 0;
-		 z =  (app.cords * (int)(b.number));
+		z = (app.cords * (int)(b.number));
 		b.cordsz += z;
 		b.number++;
 		replace(app.buildings, b);
+
+
+		if (z >= 40) {//wartosc graniczna jak budynek znika .. w sumie powinny iœæ w drug¹ stornê tak se myœlê ale chuj xDD
+			app.buildings.pop_front();
+			/*auto idx = app.buildings.;
+  app.buildings.erase(idx);*/
+		}
 
 	}
 
@@ -32,7 +39,7 @@ VOID CALLBACK TimerProc(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime) {
 void Scene::addBuilding(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
 	if (this->buildings.size() < this->maxBuildings) {
 		float x = rand() % 15 + 1;
-		this->buildings.push_front(Buildings{ x,0,0,0,this->nextBuildingNumber++ });
+		this->buildings.push_back(Buildings{ x,0,0,0,this->nextBuildingNumber++ });
 	}
 };
 void Scene::render() {
@@ -76,8 +83,7 @@ void Scene::render() {
 	Ground(P, V, M, 0, 0, 0);
 
 
-	if (this->buildings.size() == 0) {
-		//todo:genmeruj budynki
+	if (this->buildings.size() == 0) { //jezeli jakiegoœ nam brakuje dodajemy kolejne
 		int BuildingsInScreen = 3;
 		int CurrentBuildings = this->buildings.size();
 		for (int i = CurrentBuildings; i < BuildingsInScreen; i++)
@@ -86,25 +92,26 @@ void Scene::render() {
 			app.addBuilding(P, V, M, 0);
 		}
 	}
-	else {
 
-		for (int i = 0; i < app.buildings.size(); i++)
-		{
-			Buildings b = get(app.buildings, i);
-			Building(app.P, app.V, app.M, b.cordsx, b.cordsy, b.cordsz);
+	//renderujemy aktualne budynki
+
+	for (int i = 0; i < app.buildings.size(); i++)
+	{
+		Buildings b = get(app.buildings, i);
+		Building(app.P, app.V, app.M, b.cordsx, b.cordsy, b.cordsz);
 
 
-		}
 	}
+
 };
 void replace(std::list<Buildings>& l, const Buildings b) {
 	for (auto it = l.rbegin(); it != l.rend(); it++) {
 		if (it->id == b.id) {
 			it->id = b.id;
 			it->number = b.number;
-			it->cords = b.cords ;
+			it->cords = b.cords;
 			it->cordsx = b.cordsx;
-			it->cordsy= b.cordsy;
+			it->cordsy = b.cordsy;
 			it->cordsz = b.cordsz;
 			return;
 		}
