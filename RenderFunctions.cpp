@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <Externals.h>
-
+//dupa
 void plane2(glm::mat4 P, glm::mat4 V, glm::mat4 M) {
 	//Przykładowe tablice dla tego zadania - możliwości jest bardzo dużo
 	//int currentZ = 1;
