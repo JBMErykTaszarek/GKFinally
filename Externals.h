@@ -7,3 +7,10 @@
 #include "shaderprogram.h"
 #include <Scene.h>
 #include <RenderFunctions.h>
+#include <Windows.h>
+#include <windows.h>
+
+#ifdef _WIN32
+#else
+#include <unistd.h>
+#endif

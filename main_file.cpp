@@ -11,7 +11,6 @@
 #include "lodepng.h"
 #include "OBJ_Loader.h"
 
-
 GLuint tex;
 void error_callback(int error, const char* description) {
 	fputs(description, stderr);
@@ -133,6 +132,9 @@ int main(void)
 	//float speed_x = 0; //zadeklaruj zmienną przechowującą aktualny kąt obrotu
 	//float speed_y = 0; //zadeklaruj zmienną przechowującą aktualny kąt obrotu
 	glfwSetTime(0); //Wyzeruj licznik czasu
+	
+	
+	
 	while (!glfwWindowShouldClose(window)) //Tak długo jak okno nie powinno zostać zamknięte
 	{
 		//speed_x += speed_x * glfwGetTime(); //Oblicz kąt o jaki obiekt obrócił się podczas poprzedniej klatki
@@ -148,3 +150,5 @@ int main(void)
 	glfwTerminate(); //Zwolnij zasoby zajęte przez GLFW
 	exit(EXIT_SUCCESS);
 }
+
+
