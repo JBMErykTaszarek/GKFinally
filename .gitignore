@@ -3,3 +3,5 @@ Debug/
 .vs/zao_szkielet_02_win/v16/ipch/AutoPCH/99f711e114462ee6/MAIN_FILE.ipch
 .vs/zao_szkielet_02_win/v16/Browse.VC.opendb
 .vs/
+.vs/zao_szkielet_02_win/v16/Browse.VC.db
+*.db
