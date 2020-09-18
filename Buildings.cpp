@@ -4,11 +4,15 @@ Buildings::Buildings() {
 	
 
 }
-Buildings::Buildings(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cords) {
-	this->P = P;
+Buildings::Buildings(float cordsx, float cordsy, float cordsz) {
+	
+	this->cordsx = cordsx;
+	this->cordsy = cordsy;
+	this->cordsz = cordsz;
+	/*this->P = P;
 	this->V = V;
 	this->M = M;
-	this->cords = cords;
+	this->cords = cords;*/
 
 }
 Buildings::~Buildings() {
