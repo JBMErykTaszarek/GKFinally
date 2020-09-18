@@ -67,23 +67,23 @@ void Scene::render() {
 	{
 		this->samolot.cordsy += 0.2f;
 		
-		//this->samolot.V =  glm::translate(V, glm::vec3(0.0f, 1.0f, 1.0f));
+		this->samolot.V =  glm::translate(V, glm::vec3(0.0f, 1.0f, 1.0f));
 	}
 	if (speed_x == -1)
 	{
 		this->samolot.cordsy -= 0.2f;
 
-		//this->samolot.V = glm::translate(V, glm::vec3(0.0f, -0.5f, 1.0f));
+		this->samolot.V = glm::translate(V, glm::vec3(0.0f, -0.5f, 1.0f));
 	}
 	if (speed_y == 1)
 	{
 		this->samolot.cordsx -= 0.2f;
-		//this->samolot.V = glm::translate(V, glm::vec3(0.4f, 0.0f, 1.0f));
+		this->samolot.V = glm::translate(V, glm::vec3(0.4f, 0.0f, 1.0f));
 	}
 	if (speed_y == -1)
 	{
 		this->samolot.cordsx += 0.2f;
-		//this->samolot.V = glm::translate(V, glm::vec3(-0.4f, 0.0f, 1.0f));
+		this->samolot.V = glm::translate(V, glm::vec3(-0.4f, 0.0f, 1.0f));
 	}
 
 	glm::mat4 M = glm::lookAt(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)); //Wylicz macierz widoku
