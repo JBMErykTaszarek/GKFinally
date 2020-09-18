@@ -5,22 +5,57 @@
 void plane(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, float cordsz) {
 	//Przyk³adowe tablice dla tego zadania - mo¿liwoœci jest bardzo du¿o
 	int currentZ = 1;
-	int x1 = 0, x2 = 1, x3 = -1;
-	int y1 = 1, y2 = 0;
-	int z1 = 1, z2 = -1;
+
+	int x1 = 0, x2 = 0.5, x3 = 1.5;
+	int y1 = 0, y2 = 0.2;
+	int z1 = 1, z2 = 3;
+
 
 	float birdVertices[] = {
-		x1 + cordsx,y1 + cordsy,z1 + cordsz,1,
-		x2 + cordsx,y2 + cordsy,z1 + cordsz,1,
-		x1 + cordsx,y1 + cordsy,z2 + cordsz,1,
+	-0.5, 0.2, 1, 1,
+	-1.5, 0.2, 1, 1,
+	0, 0.2, 3, 1,
+	0.5, 0.2, 1, 1,
+	1.5, 0.2, 1, 1,
+	0, 0.2, 3, 1,
+	0,0,1,1,
+	-0.5,0.2,1,1,
+	0,0.2,3,1,
+	0,0,1,1,
+	0.5,0.2,1,1,
+	0,0.2,3,1
 
-		x1 + cordsx,y1 + cordsy,z1 + cordsz,1,
-		x1 + cordsx,y1 + cordsy,z2 + cordsz,1,
-		x3 + cordsx,y2 + cordsy,z1 + cordsz,1
 
 	};
+	/*float birdVertices[] = {
+		-x2 + cordsx, y2 + cordsy, z1+cordsz, 1,
+		-x3 + cordsx, y2 + cordsy, z1+cordsz, 1,
+		x1 + cordsx, y2 + cordsy, z2+cordsz, 1,
+		x2 + cordsx, y2 + cordsy, z1+cordsz, 1,
+		x3 + cordsx, y2 + cordsy, z1+cordsz, 1,
+		x1 + cordsx, y2 + cordsy, z2+cordsz, 1,
+		x1 + cordsx,y1 + cordsy,z1+cordsz,1,
+		-x2 + cordsx,y2 + cordsy,z1+cordsz,1,
+		x1 + cordsx,y2 + cordsy,z2+cordsz,1,
+		x1 + cordsx,y1 + cordsy,z1+cordsz,1,
+		x2 + cordsx,y2 + cordsy,z1+cordsz,1,
+		x1 + cordsx,y2 + cordsy,z2+cordsz,1
+
+
+	};*/
+
+
+
 
 	float birdColors[] = {
+		1,0,0,1,
+		0,1,0,1,
+		1,0,0,1,
+
+		1,0,0,1,
+		1,0,0,1,
+		0,0,1,1,
+
 		1,0,0,1,
 		0,1,0,1,
 		1,0,0,1,
@@ -46,7 +81,7 @@ void plane(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, fl
 	glEnableVertexAttribArray(spColored->a("color"));
 	glVertexAttribPointer(spColored->a("color"), 4, GL_FLOAT, false, 0, birdColors); //Wspó³rzêdne wierzcho³ków bierz z tablicy birdColors
 
-	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glDrawArrays(GL_TRIANGLES, 0, 12);
 
 	glDisableVertexAttribArray(spColored->a("vertex"));
 	glDisableVertexAttribArray(spColored->a("color"));
