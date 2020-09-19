@@ -61,7 +61,7 @@
     <None Include="v_textured.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="D:\Downloads\Grass" />
+    <Image Include="D:\Downloads\green+grass.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
