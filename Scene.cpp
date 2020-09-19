@@ -9,11 +9,10 @@ Scene::Scene() {
 	this->maxBuildings = 3;
 	this->samolot.V = glm::mat4(1.0f);
 	this->cords = 1; //todo: zrobic zmienn¹ distanceStep okreslajac¹ dystans jaki pokonuje budynek na 1 ruch
-	int MovementTimer = 750;
-	this->buildings.push_back(Buildings{ 0,0,40,0,this->nextBuildingNumber++ });
+	int MovementTimer = 50;
 
 	UINT TimerId = SetTimer(NULL, 0, MovementTimer, &ChangeBuildingsPosition);
-	UINT TimerId2 = SetTimer(NULL, 0, MovementTimer*5, &CheckBuildingsInScreen);
+	UINT TimerId2 = SetTimer(NULL, 0, MovementTimer*15, &CheckBuildingsInScreen);
 
 }
 VOID CALLBACK ChangeBuildingsPosition(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime) {
