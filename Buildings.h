@@ -5,13 +5,13 @@
 class Buildings
 {
 public:
-	glm::mat4 P; glm::mat4 V; glm::mat4 M; 
 	int id;
 	int number; //iteracja w ktorej znajduje sie budynek // ktory krok wykonuje
 	float cordsx; float cordsy; float cordsz;
 	float cords; //czasowa zmienna sprawdzamy tylk czy jest ustawiony boiekt w pamieci czy ma wartosci
+	glm::mat4 P; glm::mat4 V; glm::mat4 M; 
 	Buildings();
-	Buildings(float cordsx, float cordsy, float cordsz,int nubmer,int id);
+	Buildings(glm::mat4 P, glm::mat4 V, glm::mat4 M,float cordsx, float cordsy, float cordsz,int nubmer,int id);
 	~Buildings();
 
 private:
