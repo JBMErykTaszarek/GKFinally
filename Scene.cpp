@@ -91,10 +91,8 @@ void Scene::render() {
 	for (int i = 0; i < app.buildings.size(); i++)
 	{
 		Buildings building = get(app.buildings, i);
-		float radians = 50.0f, a = 1.0f, b = 1.0f, c = 50.0f;
-		
-		building.P = glm::perspective(glm::radians(radians), a, b, c); //todo: zmienic perspektywe ??
-		
+
+
 		Building(building.P, building.V, building.M, building.cordsx, building.cordsy, building.cordsz);
 	}
 };
@@ -138,6 +136,9 @@ VOID CALLBACK ChangeBuildingsPosition(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD
 		z = (app.stepDistance * (int)(b.number));
 
 		//todo: czy nie trzeba by tez zmieniackorduynantow P V I M ?
+		/*float radians = 50.0f, f = 1.0f, g = 1.0f, h = 50.0f;
+		b.P = glm::perspective(glm::radians(radians), f, g, h); */
+		
 		//tu zmieniamy dane danego budynku przy kazdym wywolaniu timeoyu
 		z = b.cordsz - app.stepDistance;
 		b.cordsz = z;
@@ -148,9 +149,7 @@ VOID CALLBACK ChangeBuildingsPosition(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD
 
 		if (z <= -8) {//wartosc graniczna jak budynek znika .. w sumie powinny iœæ w drug¹ stornê tak se myœlê ale chuj xDD
 			app.buildings.pop_front();
-
 		}
-
 	}
 
 
