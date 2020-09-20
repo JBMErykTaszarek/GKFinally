@@ -167,7 +167,7 @@ VOID CALLBACK ChangeBuildingsPosition(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD
 
 			}
 			else {
-				printf("Sprawdzam Kolizja %f %f %f %f \n", app.samolot.cordsx, x1, x2, b.cordsx);
+				/*printf("Sprawdzam Kolizja %f %f %f %f \n", app.samolot.cordsx, x1, x2, b.cordsx);*/
 			}
 		}
 
