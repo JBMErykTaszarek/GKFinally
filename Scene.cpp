@@ -2,6 +2,7 @@
 #include <Externals.h>
 #include <time.h>
 #include <ctime>
+#include <iostream>
 
 Scene::Scene() {
 	srand(time(NULL));
@@ -128,6 +129,7 @@ Buildings get(std::list<Buildings> _list, int _i) {
 
 VOID CALLBACK ChangeBuildingsPosition(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD dwTime) {
 	float z;
+	float ColizionZCord = 8;
 	for (int i = 0; i < app.buildings.size(); i++)
 	{
 		Buildings b = get(app.buildings, i);
@@ -138,16 +140,39 @@ VOID CALLBACK ChangeBuildingsPosition(HWND hWnd, UINT nMsg, UINT nIDEvent, DWORD
 		//todo: czy nie trzeba by tez zmieniackorduynantow P V I M ?
 		/*float radians = 50.0f, f = 1.0f, g = 1.0f, h = 50.0f;
 		b.P = glm::perspective(glm::radians(radians), f, g, h); */
-		
+
 		//tu zmieniamy dane danego budynku przy kazdym wywolaniu timeoyu
 		z = b.cordsz - app.stepDistance;
 		b.cordsz = z;
 
 		b.number++;
 		replace(app.buildings, b);
+		//printf("Sprawdzam Kolizja  \n");
+		if (z == -ColizionZCord) {
+			float PlaneOffset = 8;
+			float BuildingOffset = 1.0;
+			//printf("Sprawdzam Kolizja 2 \n");
+
+			float x1 = b.cordsx + app.BuildingStartPositionX1 - BuildingOffset,
+				x2 = b.cordsx + app.BuildingStartPositionX2 + BuildingOffset,
+				x = app.samolot.cordsx;
+
+			/*if ((b.cordsx + BuildingOffset) >= (app.samolot.cordsx)
+				&& (b.cordsx - BuildingOffset) <= (app.samolot.cordsx )) */
+			
+			if (x1 <= (x) && x2 >= (x))
+			{
+				//sprawdzamy czy budynek wystepouje na osiach x-owych pokrywajacych sie z dlugoscia samolotu 
+				printf("Uderzy³ %f %f %f %f \n", app.samolot.cordsx, x1, x2, b.cordsx);
+
+			}
+			else {
+				printf("Sprawdzam Kolizja %f %f %f %f \n", app.samolot.cordsx, x1, x2, b.cordsx);
+			}
+		}
 
 
-		if (z <= -8) {//wartosc graniczna jak budynek znika .. w sumie powinny iœæ w drug¹ stornê tak se myœlê ale chuj xDD
+		if (z <= -(ColizionZCord + 1)) {//wartosc graniczna jak budynek znika .. w sumie powinny iœæ w drug¹ stornê tak se myœlê ale chuj xDD
 			app.buildings.pop_front();
 		}
 	}

@@ -14,7 +14,9 @@ public:
 		speed_x = 0,//[radiany/s]
 		speed_y = 0,//[radiany/s]
 		stepDistance = 2,
-		keyMovementDistance = 0.2f;
+		keyMovementDistance = 0.2f,
+		BuildingStartPositionX1 = -5,
+		BuildingStartPositionX2 = -3;
 
 	int nextBuildingNumber = 0, //identyfikatory który to budynek
 		maxBuildings = 3,
