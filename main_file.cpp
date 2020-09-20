@@ -10,7 +10,7 @@
 #include "allmodels.h"
 #include "lodepng.h"
 #include "OBJ_Loader.h"
-GLuint tex[2];
+GLuint tex[3];
 
 void error_callback(int error, const char* description) {
 	fputs(description, stderr);
@@ -79,6 +79,7 @@ void initOpenGLProgram(GLFWwindow* window) {
 	glfwSetKeyCallback(window, key_callback);
 	tex[0] = readTexture("green+grass.png");
 	tex[1] = readTexture("bricks.png");
+	tex[2] = readTexture("paper.png");
 }
 
 
@@ -86,7 +87,7 @@ void initOpenGLProgram(GLFWwindow* window) {
 void freeOpenGLProgram(GLFWwindow* window) {
 	freeShaders();
 	//************Tutaj umieszczaj kod, który należy wykonać po zakończeniu pętli głównej************
-	glDeleteTextures(2, tex);
+	glDeleteTextures(3, tex);
 }
 void Ground(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, float cordsz) {
 	int x1 = 100, x2 = -100;
@@ -112,13 +113,13 @@ void Ground(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, f
 	};
 
 	float texGroundCoords[]{
-		1.0f,0.0f,
-		0.0f,1.0f,
+		20.0f,0.0f,
+		0.0f,20.0f,
 		0.0f,0.0f,
 
-		1.0f,0.0f,
-		1.0f,1.0f,
-		0.0f,1.0f
+		20.0f,0.0f,
+		20.0f,20.0f,
+		0.0f,20.0f
 	};
 
 
@@ -189,8 +190,28 @@ void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy,
 	//te z ty�u xD
 	x2 + cordsx,y2 + cordsy,z2 + cordsz,1,
 	x2 + cordsx,y1 + cordsy,z2 + cordsz,1,
-	x1 + cordsx,y1 + cordsy,z2 + cordsz,1
-
+	x1 + cordsx,y1 + cordsy,z2 + cordsz,1,
+	// Ściana boczna lewa
+	x1 + cordsx, y1 + cordsy, z1 + cordsz, 1,
+	x1 + cordsx,y2 + cordsy,z1 + cordsz,1,
+	x1 + cordsx,y2 + cordsy,z2 + cordsz,1,
+	//drtugi trojkat
+	x1 + cordsx,y2 + cordsy,z2 + cordsz,1, //int x1 = -5, x2 = -3;
+											//int y1 = 3, y2 = -3;
+											//int z1 = 10, z2 = 8
+	x1 + cordsx,y1 + cordsy,z2 + cordsz,1,
+	x1 + cordsx,y1 + cordsy,z1 + cordsz,1,
+	//ściana boczna prawa
+	x2 + cordsx, y1 + cordsy, z1 + cordsz, 1,
+	x2 + cordsx,y2 + cordsy,z1 + cordsz,1,
+	x2 + cordsx,y2 + cordsy,z2 + cordsz,1,
+	//drtugi trojkat
+	x2 + cordsx,y2 + cordsy,z2 + cordsz,1, //int x1 = -5, x2 = -3;
+											//int y1 = 3, y2 = -3;
+											//int z1 = 10, z2 = 8
+	x2 + cordsx,y1 + cordsy,z2 + cordsz,1,
+	x2 + cordsx,y1 + cordsy,z1 + cordsz,1,
+	
 
 
 
@@ -218,17 +239,39 @@ void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy,
 	};
 
 	float texbuildingCoords[]{
-		1.0f,0.0f,
 		0.0f,1.0f,
 		0.0f,0.0f,
+		1.0f,0.0f,
+
+		
+		1.0f,0.0f,
+		1.0f,1.0f,
+		0.0f,1.0f,
+		
+
+		0.0f,1.0f,
+		0.0f,0.0f,
+		1.0f,0.0f,
+
 
 		1.0f,0.0f,
 		1.0f,1.0f,
 		0.0f,1.0f,
 
-		1.0f,0.0f,
 		0.0f,1.0f,
 		0.0f,0.0f,
+		1.0f,0.0f,
+
+
+		1.0f,0.0f,
+		1.0f,1.0f,
+		0.0f,1.0f,
+
+
+		0.0f,1.0f,
+		0.0f,0.0f,
+		1.0f,0.0f,
+
 
 		1.0f,0.0f,
 		1.0f,1.0f,
@@ -249,6 +292,93 @@ void Building(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy,
 
 	glEnableVertexAttribArray(spTextured->a("texCoord"));
 	glVertexAttribPointer(spTextured->a("texCoord"), 2, GL_FLOAT, false, 0, texbuildingCoords); //Współrzędne teksturowania bierz z tablicy myCubeTexCoords
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, tex[1]);
+	glUniform1i(spTextured->u("tex"), 0);
+
+	glDrawArrays(GL_TRIANGLES, 0, 24);
+
+	glDisableVertexAttribArray(spTextured->a("vertex"));
+	glDisableVertexAttribArray(spTextured->a("color"));
+
+}
+void plane(glm::mat4 P, glm::mat4 V, glm::mat4 M, float cordsx, float cordsy, float cordsz) {
+	int currentZ = 1;
+	float x1 = 0, x2 = 0.5, x3 = 1.5;
+	float y1 = -0.3, y2 = 0.2;
+	float z1 = 1, z2 = 3;
+	float birdVertices[] = {
+	-x2 + cordsx, y2 + cordsy, z1, 1,
+		-x3 + cordsx, y2 + cordsy, z1, 1,
+		x1 + cordsx, y2 + cordsy, z2, 1,
+
+		x2 + cordsx, y2 + cordsy, z1, 1,
+		x3 + cordsx, y2 + cordsy, z1, 1,
+		x1 + cordsx, y2 + cordsy, z2, 1,
+
+		x1 + cordsx,y1 + cordsy,z1,1,
+		-x2 + cordsx,y2 + cordsy,z1,1,
+		x1 + cordsx,y2 + cordsy,z2,1,
+
+		x1 + cordsx,y1 + cordsy,z1,1,
+		x2 + cordsx,y2 + cordsy,z1,1,
+		x1 + cordsx,y2 + cordsy,z2,1,
+
+		
+
+	};
+	float texBirdVerts[]{
+		0.0f,0.0f,
+		0.25f,0.0f,
+		0.0f,1.0f,
+
+		0.25f,0.0f,
+		0.5f,0.0f,
+		1.0f,1.0f,
+
+		0.0f,0.0f,
+		0.25f,0.0f,
+		0.0f,1.0f,
+
+		0.25f,0.0f,
+		0.5f,0.0f,
+		1.0f,1.0f
+
+	};
+
+	float birdColors[] = {
+		1,1,1,1,
+		1,1,1,1,
+		1,1,1,1,
+
+		1,1,1,1,
+		1,1,1,1,
+		1,1,1,1,
+
+		1,1,1,1,
+		1,1,1,1,
+		1,1,1,1,
+
+		1,1,1,1,
+		1,1,1,1,
+		1,1,1,1
+	};
+
+
+
+	spTextured->use(); //Aktywuj program cieniujący
+
+	glUniformMatrix4fv(spTextured->u("P"), 1, false, glm::value_ptr(P)); //Załaduj do programu cieniującego macierz rzutowania
+	glUniformMatrix4fv(spTextured->u("V"), 1, false, glm::value_ptr(V)); //Załaduj do programu cieniującego macierz widoku
+	glUniformMatrix4fv(spTextured->u("M"), 1, false, glm::value_ptr(M)); //Załaduj do programu cieniującego macierz modelu
+
+
+	glEnableVertexAttribArray(spTextured->a("vertex"));
+	glVertexAttribPointer(spTextured->a("vertex"), 4, GL_FLOAT, false, 0, birdVertices); //Współrzędne wierzchołków bierz z tablicy myCubeVertices
+
+	glEnableVertexAttribArray(spTextured->a("texCoord"));
+	glVertexAttribPointer(spTextured->a("texCoord"), 2, GL_FLOAT, false, 0, texBirdVerts); //Współrzędne teksturowania bierz z tablicy myCubeTexCoords
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, tex[2]);
